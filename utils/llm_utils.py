@@ -1,15 +1,16 @@
 import lmstudio as lms
 
-
-# SERVER_API_HOST = "192.168.1.29:1234"
-# lms.configure_default_client(SERVER_API_HOST)
+# remote = "192.168.1.29:1234"
+# local = "localhost:1234"
+# llm_server_to_prompt = local
+# lms.configure_default_client(llm_server_to_prompt)
 
 def llm_server():
     client = lms.get_default_client()
     print(client.api_host)
 
 # # List downloaded models
-def list_downloaded_modules():
+def list_downloaded_models():
     downloaded = lms.list_downloaded_models()
     llm_only = lms.list_downloaded_models("llm")
     embedding_only = lms.list_downloaded_models("embedding")
@@ -20,7 +21,7 @@ def list_downloaded_modules():
 
 
 # List Loaded Models
-def list_loaded_modules():
+def list_loaded_models():
     downloaded = lms.list_loaded_models()
     print('loaded models:')
     all_loaded_models = lms.list_loaded_models()
@@ -57,19 +58,25 @@ def load_model():
     print(get_current_model())
     print(lms.llm)
 
-def send_prompt(user_prompt,lm_studio_server,model_to_use):
-    lms.configure_default_client(lm_studio_server)
+def send_prompt(user_prompt,llm_server_to_prompt,model_to_use):
+    lms.configure_default_client(llm_server_to_prompt)
     model = lms.llm(model_to_use)
     result = model.respond(user_prompt)
     print(result)
     return result
 
 
-# list_downloaded_modules()
-# list_loaded_modules()
-# get_current_model()
-# unload_model()
-# check_model()
-# load_model()
-# llm_server()
+def image_prompt(user_prompt,llm_server_to_prompt,model_to_use,image_file):
+    lms.configure_default_client(llm_server_to_prompt)
+    model = lms.llm(model_to_use)
+    result = model.respond(user_prompt)
+    image_handle = lms.prepare_image(image_file)
+    chat = lms.Chat()
+    chat.add_user_message(user_prompt, images=[image_handle])
+    prediction = model.respond(chat)
+    # print(prediction)
+    return prediction
+
+
+
 
