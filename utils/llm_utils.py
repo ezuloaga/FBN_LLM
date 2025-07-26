@@ -7,32 +7,30 @@ import lmstudio as lms
 
 def llm_server():
     client = lms.get_default_client()
-    print(client.api_host)
+    result = client.api_host
+    # print(type(result))
+    # print(result)
+    return result
 
-# # List downloaded models
-def list_downloaded_models():
-    downloaded = lms.list_downloaded_models()
-    llm_only = lms.list_downloaded_models("llm")
-    embedding_only = lms.list_downloaded_models("embedding")
 
-    print('downloaded models:')
-    for model in downloaded:
-        print(model)
 
 
 # List Loaded Models
 def list_loaded_models():
-    downloaded = lms.list_loaded_models()
-    print('loaded models:')
     all_loaded_models = lms.list_loaded_models()
     llm_only = lms.list_loaded_models("llm")
     embedding_only = lms.list_loaded_models("embedding")
+
     print(all_loaded_models)
 
 # get current model
 def get_current_model():
-    print('Current model')
-    print(lms.llm)
+    model = lms.llm()
+    print(model)
+    return model
+    # retrun model
+    # print('Current model')
+
 
 # Unload model
 def unload_model():
@@ -58,15 +56,14 @@ def load_model():
     print(get_current_model())
     print(lms.llm)
 
-def send_prompt(user_prompt,llm_server_to_prompt,model_to_use):
+def text_prompt(user_prompt,llm_server_to_prompt,model_to_use):
     lms.configure_default_client(llm_server_to_prompt)
     model = lms.llm(model_to_use)
     result = model.respond(user_prompt)
     print(result)
     return result
 
-
-def image_prompt(user_prompt,llm_server_to_prompt,model_to_use,image_file):
+def describe_image_prompt(user_prompt,llm_server_to_prompt,model_to_use,image_file):
     lms.configure_default_client(llm_server_to_prompt)
     model = lms.llm(model_to_use)
     result = model.respond(user_prompt)
@@ -78,5 +75,20 @@ def image_prompt(user_prompt,llm_server_to_prompt,model_to_use,image_file):
     return prediction
 
 
+# # List downloaded models
+def list_downloaded_models():
+    downloaded = lms.list_downloaded_models()
+    llm_only = lms.list_downloaded_models("llm")
+    embedding_only = lms.list_downloaded_models("embedding")
+    print('downloaded models:')
+    for model in downloaded:
+        print(model)
 
+# llm_server()
+
+# list_downloaded_models()
+
+# get_current_model()
+
+# list_loaded_models()
 

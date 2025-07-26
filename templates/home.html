@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{ page_title }}</h1>
+<li><a href="{{ url_for('home') }}">home</a></li>
+<li><a href="{{ url_for('upload_folder') }}">upload_folder</a></li>
+<li><a href="{{ url_for('llm_text_prompt') }}">llm_text_prompt</a></li>
+<li><a href="{{ url_for('llm_describe_image') }}">llm_describe_image</a></li>
+<li><a href="{{ url_for('run_util') }}">run_util</a></li>
+{% endblock content %}
