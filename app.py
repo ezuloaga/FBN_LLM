@@ -1,9 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
 from utils.llm_prompt import text_prompt, describe_image_prompt
 from utils.llm_utils import RunUtility, lm_studio_host
-import random
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
+app.secret_key = 'a053a0d115c800cd177474dc7c4a0646'  # Required for CSRF protection
 
 
 @app.route('/')
@@ -13,25 +16,6 @@ def home():
     return render_template(
         'home.html',
         page_title=page_title)
-
-
-@app.route('/text_prompt')
-def llm_text_prompt():
-    page_title = 'FatGPT | Text Prompt'
-    model_to_use="google/gemma-3-12b" # Local/Remote
-    lm_studio_host = "localhost:1234" # Local
-    # lm_studio_host = "192.168.1.29:1234" # Remote
-    # model_to_use="deepseek/deepseek-r1-0528-qwen3-8b" # Remote
-    user_prompt = "Tell me a joke"
-    result = text_prompt(user_prompt,lm_studio_host,model_to_use)
-
-    return render_template(
-        'text_prompt.html',
-        page_title=page_title,
-        result=result,
-        model_to_use=model_to_use,
-        user_prompt=user_prompt,
-        lm_studio_host=lm_studio_host)
 
 
 @app.route('/describe_image')
@@ -76,12 +60,33 @@ def run_util():
         page_title=page_title,
         lm_studio_host=lm_studio_host)
 
-@app.route('/upload_image')
-def upload_image():
-    page_title = "FatGPT | Upload an image"
-    return render_template(
-        'image_upload.html',
-        page_title=page_title)
+
+# Define the form
+class TextPromptForm(FlaskForm):
+    name = StringField('What do you want to ask?', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
+@app.route('/text_prompt', methods=['GET', 'POST'])
+def llm_text_prompt():
+    form = TextPromptForm()
+    page_title = 'FatGPT | Submit Text Prompt'
+    model_to_use = "google/gemma-3-12b"  # Local/Remote
+    lm_studio_host = "localhost:1234"  # Local
+    if form.validate_on_submit():
+        page_title = 'FatGPT | Text Prompt Result'
+        name = form.name.data
+        user_prompt = form.name.data
+        result = text_prompt(user_prompt, lm_studio_host, model_to_use)
+
+        return render_template(
+            'text_prompt.html',
+            page_title=page_title,
+            result=result,
+            model_to_use=model_to_use,
+            user_prompt=user_prompt,
+            lm_studio_host=lm_studio_host)
+    return render_template('text_prompt_form.html', form=form, page_title=page_title, model_to_use=model_to_use,lm_studio_host=lm_studio_host)
 
 
 if __name__ == '__main__':
