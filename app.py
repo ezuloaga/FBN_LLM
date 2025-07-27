@@ -1,7 +1,5 @@
-from flask import Flask, render_template, url_for, send_from_directory
-import os
-# import lmstudio as lms
-from utils.llm_utils import text_prompt, describe_image_prompt, llm_server, list_loaded_models
+from flask import Flask, render_template
+from utils.llm_utils import text_prompt, describe_image_prompt, list_loaded_models
 
 app = Flask(__name__)
 
