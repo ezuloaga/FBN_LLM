@@ -13,8 +13,6 @@ def llm_server():
     return result
 
 
-
-
 # List Loaded Models
 def list_loaded_models():
     all_loaded_models = lms.list_loaded_models()
@@ -51,10 +49,12 @@ def check_model():
     except Exception as e:
         print(e)
 
+
 def load_model():
     model = lms.llm("deepseek/deepseek-r1-0528-qwen3-8b")
     print(get_current_model())
     print(lms.llm)
+
 
 def text_prompt(user_prompt,llm_server_to_prompt,model_to_use):
     lms.configure_default_client(llm_server_to_prompt)
@@ -62,6 +62,7 @@ def text_prompt(user_prompt,llm_server_to_prompt,model_to_use):
     result = model.respond(user_prompt)
     print(result)
     return result
+
 
 def describe_image_prompt(user_prompt,llm_server_to_prompt,model_to_use,image_file):
     lms.configure_default_client(llm_server_to_prompt)
@@ -83,12 +84,3 @@ def list_downloaded_models():
     print('downloaded models:')
     for model in downloaded:
         print(model)
-
-# llm_server()
-
-# list_downloaded_models()
-
-# get_current_model()
-
-# list_loaded_models()
-

@@ -2,9 +2,16 @@
 {% block content %}
 <h1>{{ page_title }}</h1>
 <p>{{ llm_server_to_prompt }}</p>
-<p>{{ model_to_use }}</p>
+    <p class="text-secondary">{{ model_to_use }}</p>
 <br>
-{{ user_prompt }}
-<br>
-<p>{{ result }}</p>
+
+    <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{ user_prompt }}</h6>
+    <p class="card-text">{{ result }}</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
 {% endblock content %}
