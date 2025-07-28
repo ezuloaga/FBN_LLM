@@ -1,11 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>{{ page_title }}</h1>
-<p>{{ llm_server_to_prompt }}</p>
-    <p class="text-secondary">{{ model_to_use }}</p>
-<br>
-{{ user_prompt }}
-<br>
-<p>{{ result }}</p>
+    <h4>{{ page_title }}</h4>
+<p>{{ lm_studio_host }}</p>
+<p><span class="badge badge-primary">{{ model_to_use }}</span></p>
+
+<p class="font-italic">{{ user_prompt }}</p>
+<p class="font-weight-bold">{{ result }}</p>
 
 {% endblock content %}

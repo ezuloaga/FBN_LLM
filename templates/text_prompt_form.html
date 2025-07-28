@@ -1,13 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>{{ page_title }}</h1>
-<p>{{ lm_studio_host }}</p>
-<p>{{ model_to_use }}</p>
-<h2>Prompt</h2>
+    <br>
+<h4>{{ page_title }}</h4>
+<p>LM Host: {{ lm_studio_host }}</p>
+<p><span class="badge badge-primary">{{ model_to_use }}</span></p>
+
+
+<h5>Prompt</h5>
 <form method="POST">
 {{ form.hidden_tag() }}
 {{ form.name.label }}<br>
 {{ form.name(size=50) }}<br><br>
 {{ form.submit() }}
 </form>
+
 {% endblock content %}
