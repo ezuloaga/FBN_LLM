@@ -88,7 +88,11 @@ def llm_text_prompt():
             model_to_use=model_to_use,
             user_prompt=user_prompt,
             lm_studio_host=lm_studio_host)
-    return render_template('text_prompt_form.html', form=form, page_title=page_title, model_to_use=model_to_use,lm_studio_host=lm_studio_host)
+    return render_template(
+        'text_prompt_form.html',
+        form=form, page_title=page_title,
+        model_to_use=model_to_use,
+        lm_studio_host=lm_studio_host)
 
 
 if __name__ == '__main__':
