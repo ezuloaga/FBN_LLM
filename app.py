@@ -20,7 +20,7 @@ def home():
 
 @app.route('/describe_image')
 def llm_describe_image():
-    page_title="Describe an image"
+    page_title="Image Prompt"
 
     # lm_studio_host = "192.168.1.29:1234" # Remote
     lm_studio_host = "localhost:1234" # Local
@@ -50,7 +50,7 @@ def llm_describe_image():
 
 @app.route('/run_util')
 def run_util():
-    page_title = "Utility Test"
+    page_title = "App Utilities"
     # lm_studio_host = "localhost:1234"
     lm_studio_host = "192.168.1.29:1234"
     RunUtility.get_server_address(lm_studio_host=lm_studio_host)
@@ -70,7 +70,7 @@ class TextPromptForm(FlaskForm):
 @app.route('/text_prompt', methods=['GET', 'POST'])
 def llm_text_prompt():
     form = TextPromptForm()
-    page_title = 'Submit Text Prompt'
+    page_title = 'Text Prompt'
     model_to_use = "google/gemma-3-12b"  # Local/Remote
     # model_to_use = "deepseek/deepseek-r1-0528-qwen3-8b"  # Local/Remote
     lm_studio_host = "localhost:1234"  # Local
