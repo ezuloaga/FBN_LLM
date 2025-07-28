@@ -20,7 +20,7 @@ def home():
 
 @app.route('/describe_image')
 def llm_describe_image():
-    page_title="FatGPT | Describe an image"
+    page_title="Describe an image"
 
     # lm_studio_host = "192.168.1.29:1234" # Remote
     lm_studio_host = "localhost:1234" # Local
@@ -50,7 +50,7 @@ def llm_describe_image():
 
 @app.route('/run_util')
 def run_util():
-    page_title = "FatGPT | Utility Test"
+    page_title = "Utility Test"
     # lm_studio_host = "localhost:1234"
     lm_studio_host = "192.168.1.29:1234"
     RunUtility.get_server_address(lm_studio_host=lm_studio_host)
@@ -70,11 +70,11 @@ class TextPromptForm(FlaskForm):
 @app.route('/text_prompt', methods=['GET', 'POST'])
 def llm_text_prompt():
     form = TextPromptForm()
-    page_title = 'FatGPT | Submit Text Prompt'
+    page_title = 'Submit Text Prompt'
     model_to_use = "google/gemma-3-12b"  # Local/Remote
     lm_studio_host = "localhost:1234"  # Local
     if form.validate_on_submit():
-        page_title = 'FatGPT | Text Prompt Result'
+        page_title = 'Text Prompt Result'
         name = form.name.data
         user_prompt = form.name.data
         result = text_prompt(user_prompt, lm_studio_host, model_to_use)
