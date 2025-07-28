@@ -1,10 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h4>{{ page_title }}</h4>
-<p>{{ lm_studio_host }}</p>
-<p><span class="badge badge-primary">{{ model_to_use }}</span></p>
-
+<h4>{{ page_title }}</h4>
+<span class="badge badge-info">{{ lm_studio_host }}</span> <span class="badge badge-primary">{{ model_to_use }}</span><br><br>
 <p class="font-italic">{{ user_prompt }}</p>
 <p class="font-weight-bold">{{ result }}</p>
-
 {% endblock content %}

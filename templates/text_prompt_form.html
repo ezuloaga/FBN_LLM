@@ -1,12 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
-    <br>
+<br>
 <h4>{{ page_title }}</h4>
-<p>LM Host: {{ lm_studio_host }}</p>
-<p><span class="badge badge-primary">{{ model_to_use }}</span></p>
-
-
-<h5>Prompt</h5>
+<span class="badge badge-info">{{ lm_studio_host }}</span> <span class="badge badge-primary">{{ model_to_use }}</span><br><br>
 <form method="POST">
 {{ form.hidden_tag() }}
 {{ form.name.label }}<br>
