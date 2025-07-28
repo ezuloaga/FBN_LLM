@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template
 from utils.llm_prompt import text_prompt, describe_image_prompt
-from utils.llm_utils import RunUtility, lm_studio_host
+from utils.llm_utils import RunUtility
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
