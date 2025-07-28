@@ -12,7 +12,7 @@ app.secret_key = 'a053a0d115c800cd177474dc7c4a0646'  # Required for CSRF protect
 @app.route('/')
 @app.route('/home')
 def home():
-    page_title = 'Welcome to FatAI'
+    page_title = 'Welcome to FatGPT'
     return render_template(
         'home.html',
         page_title=page_title)
@@ -27,11 +27,11 @@ def llm_describe_image():
     model_to_use="qwen2-vl-2b-instruct" # Local
     # model_to_use="google/gemma-3-12b" # Local/Remote
 
-    image_file = "user_uploads/screenshot.png"
-    user_prompt = "is there a car in this screenshot?"
+    # image_file = "user_uploads/screenshot.png"
+    # user_prompt = "is there a car in this screenshot?"
 
-    # image_file = "user_uploads/tina.jpeg"
-    # user_prompt = "is there a dog in this image?"
+    image_file = "user_uploads/tina.jpeg"
+    user_prompt = "is there a dog in this image?"
 
     # image_file = "user_uploads/rav4.jpeg"
     # user_prompt = "is there a car in this image?"
