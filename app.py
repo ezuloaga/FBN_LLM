@@ -72,7 +72,9 @@ def llm_text_prompt():
     form = TextPromptForm()
     page_title = 'Submit Text Prompt'
     model_to_use = "google/gemma-3-12b"  # Local/Remote
+    # model_to_use = "deepseek/deepseek-r1-0528-qwen3-8b"  # Local/Remote
     lm_studio_host = "localhost:1234"  # Local
+    # lm_studio_host = "192.168.1.29:1234"  # Remote
     if form.validate_on_submit():
         page_title = 'Text Prompt Result'
         name = form.name.data
