@@ -90,7 +90,8 @@ def llm_text_prompt():
             lm_studio_host=lm_studio_host)
     return render_template(
         'text_prompt_form.html',
-        form=form, page_title=page_title,
+        form=form,
+        page_title=page_title,
         model_to_use=model_to_use,
         lm_studio_host=lm_studio_host)
 
