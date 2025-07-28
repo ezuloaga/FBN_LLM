@@ -30,11 +30,11 @@ def llm_describe_image():
     # image_file = "user_uploads/screenshot.png"
     # user_prompt = "is there a car in this screenshot?"
 
-    image_file = "user_uploads/tina.jpeg"
-    user_prompt = "is there a dog in this image?"
+    # image_file = "user_uploads/tina.jpeg"
+    # user_prompt = "is there a dog in this image?"
 
-    # image_file = "user_uploads/rav4.jpeg"
-    # user_prompt = "is there a car in this image?"
+    image_file = "user_uploads/rav4.jpeg"
+    user_prompt = "is there a car in this image?"
 
     result = describe_image_prompt(user_prompt,lm_studio_host,model_to_use,image_file)
 
@@ -70,9 +70,9 @@ class TextPromptForm(FlaskForm):
 @app.route('/text_prompt', methods=['GET', 'POST'])
 def llm_text_prompt():
     form = TextPromptForm()
-    page_title = 'Text Prompt'
-    model_to_use = "google/gemma-3-12b"  # Local/Remote
-    # model_to_use = "deepseek/deepseek-r1-0528-qwen3-8b"  # Local/Remote
+    page_title = 'Ask the LLM for something'
+    # model_to_use = "google/gemma-3-12b"  # Local/Remote
+    model_to_use = "deepseek/deepseek-r1-0528-qwen3-8b"  # Local/Remote
     lm_studio_host = "localhost:1234"  # Local
     # lm_studio_host = "192.168.1.29:1234"  # Remote
     if form.validate_on_submit():
