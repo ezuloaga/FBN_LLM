@@ -1,5 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
-<h6>{{ page_title }}</h6>
+<!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
 
+    <!-- Session-aware navigation -->
+    {% if 'username' in session %}
+        <p>Welcome, {{ session.username }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a></p>
+    {% endif %}
+
+    <p>This is the homepage of FatGPT. Use the menu to access the image or text prompt features.</p>
 {% endblock content %}
