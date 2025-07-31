@@ -5,10 +5,10 @@ from wtforms.validators import DataRequired
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
-from functools import wraps
 
 from utils.llm_prompt import text_prompt, describe_image_prompt
 from utils.llm_utils import RunUtility
+from utils.auth_utils import login_required
 
 app = Flask(__name__)
 app.secret_key = 'a053a0d115c800cd177474dc7c4a0646'  # Required for CSRF protection and sessions
@@ -20,14 +20,6 @@ db = SQLAlchemy(app)
 
 app.permanent_session_lifetime = timedelta(days=30)
 
-def login_required(view_function):
-    @wraps(view_function)
-    def wrapper(*args, **kwargs):
-        if 'user_id' not in session:
-            flash('Please log in to access this page.', 'warning')
-            return redirect(url_for('login'))
-        return view_function(*args, **kwargs)
-    return wrapper
 
 # --- Database Models ---
 class User(db.Model):
