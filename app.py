@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import timedelta
 
 from utils.llm_prompt import text_prompt, describe_image_prompt
-from utils.llm_utils import RunUtility
+from utils.llm_utils import RunUtility, configure_lm_studio
 from utils.auth_utils import login_required
 
 app = Flask(__name__)
@@ -89,19 +89,22 @@ def run_util():
     # lm_studio_host = "localhost:1234"
     lm_studio_host = "192.168.1.29:1234"
     RunUtility.get_server_address(lm_studio_host=lm_studio_host)
+    loaded_model = RunUtility.get_loaded_models(lm_studio_host=lm_studio_host)
     # result_type = type(RunUtility.get_server_address(lm_studio_host=lm_studio_host))
     return render_template(
         'run_util.html',
         page_title=page_title,
-        lm_studio_host=lm_studio_host
+        lm_studio_host=lm_studio_host,
+        loaded_model=loaded_model
     )
 
 @app.route('/text_prompt', methods=['GET', 'POST'])
 def llm_text_prompt():
     form = TextPromptForm()
     page_title = 'Ask the LLM for something'
+    model_to_use = "qwen2-vl-2b-instruct"
     # model_to_use = "google/gemma-3-12b"  # Local/Remote
-    model_to_use = "deepseek/deepseek-r1-0528-qwen3-8b"  # Local/Remote
+    # model_to_use = "deepseek/deepseek-r1-0528-qwen3-8b"  # Local/Remote
     lm_studio_host = "localhost:1234"  # Local
     # lm_studio_host = "192.168.1.29:1234"  # Remote
     if form.validate_on_submit():
@@ -115,7 +118,7 @@ def llm_text_prompt():
             result=result,
             model_to_use=model_to_use,
             user_prompt=user_prompt,
-            lm_studio_host=lm_studio_host
+            lm_studio_host=lm_studio_host,
         )
     return render_template(
         'text_prompt_form.html',

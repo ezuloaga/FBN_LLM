@@ -3,13 +3,23 @@ import lmstudio as lms
 
 lm_studio_host = None
 
+def configure_lm_studio():
+    try:
+        lms.configure_default_client(lm_studio_host)
+    except Exception as e:
+        print(e)
+        error_msg = e
+        return error_msg
+    return None
+
+# lms.configure_default_client(lm_studio_host)
 
 class RunUtility:
 
     def __init__(self, lm_studio_host):
         self.lm_studio_host = lm_studio_host
 
-    lms.configure_default_client(lm_studio_host)
+    # lms.configure_default_client(lm_studio_host)
     ts = datetime.datetime.now()
     # print(ts)
 
@@ -45,3 +55,5 @@ class RunUtility:
         except Exception as e:
             error_msg = str(e)
             return error_msg
+
+# print(RunUtility.get_loaded_models(lm_studio_host='localhost:1234'))

@@ -2,4 +2,10 @@
 {% block content %}
 <h6>{{ page_title }}</h6>
 <span class="badge badge-info">{{ lm_studio_host }}</span><br><br>
+        <h6>Loaded Models:</h6>
+    <ul>
+        {% for loaded_model in loaded_models %}
+            <li>{{ loaded_model }}</li>
+        {% endfor %}
+    </ul>
 {% endblock content %}

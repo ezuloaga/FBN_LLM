@@ -1,7 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 <h6>{{ page_title }}</h6>
-<span class="badge badge-info">{{ lm_studio_host }}</span> <span class="badge badge-primary">{{ model_to_use }}</span><br><br>
-<p class="font-italic">{{ user_prompt }}</p>
-<p class="font-weight-bold">{{ result }}</p>
+<span class="badge badge-info">{{ lm_studio_host }}</span>
+<span class="badge badge-primary">{{ model_to_use }}</span><br><br>
+<span><p class="font-italic">{{ user_prompt }}</p></span>
+<span><p class="font-weight-bold">{{ result[0] }}</p></span>
+<span><p class="font-weight-bold">{{ result[1] }}</p></span>
+<span><p class="font-weight-bold">{{ result[2] }}</p></span>
+<span><p class="font-weight-bold">{{ result[3] }}</p></span>
+<span><p class="font-weight-bold">{{ result[4] }}</p></span>
 {% endblock content %}
