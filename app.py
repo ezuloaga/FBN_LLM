@@ -12,13 +12,13 @@ from utils.auth_utils import login_required
 
 app = Flask(__name__)
 app.secret_key = 'a053a0d115c800cd177474dc7c4a0646'  # Required for CSRF protection and sessions
+app.permanent_session_lifetime = timedelta(days=30)
 
 # Configure SQLite and SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
-app.permanent_session_lifetime = timedelta(days=30)
+db = SQLAlchemy(app)
 
 
 # --- Database Models ---
@@ -38,12 +38,12 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Register')
 
-
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
 
 # --- Routes ---
 @app.route('/')
